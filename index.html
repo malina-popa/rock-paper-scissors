@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, paper, scissors</title>
+</head>
+<body>
+    <script>
+        //Create a function getComputerChoice that will randomly return "rock", "paper" or "scissors".
+        //This solution uses arrays:
+        
+        /* function getComputerChoice () {
+            const choice = ["rock", "paper", "scissors"];
+            return choice[Math.floor(Math.random() * choice.length)]; //return choice de [valoarea random-num - rock, paper etc.]
+        }
+
+        console.log(getComputerChoice()) */
+
+        //This is a non-array solution:
+
+        function getComputerChoice () {
+            const choice = Math.floor(Math.random() * 3) + 1;
+
+            if (choice === 1) {
+                return "rock";
+            } else if (choice === 2) {
+                return "paper";
+            } else {
+                return "scissors";
+            }
+        }
+
+        //Create a playRound function that plays a single round or Rock, Paper, Scissors
+        //takes 2 case-insensitive parameters (playerSelection and computerSelection)
+        //and returns a string that declares the winner.
+
+        //if the player inputs rock and the computer inputs scissors = you won!
+        //if the player inputs rock and the computer inputs paper = you lost!
+
+        //if the player inputs paper and the computer inputs rock = you won!
+        //if the player inputs paper and the computer inputs scissors = you lost!
+
+        //if the player inputs scissors and the computer inputs paper = you won!
+        //if the player inputs scissors and the computer inputs rock = you lost!
+
+        //if player choice === computer choice = it'a a tie!
+        
+        const computerSelection = getComputerChoice();
+        let playerSelection = prompt("Let's play Rock, Paper, Scissors! Please insert 'rock', 'paper', or 'scissors' to start playing.");
+        playerSelection = playerSelection.toLowerCase();
+        
+        function playRound (playerSelection, computerSelection) {
+            if (playerSelection === "rock" && computerSelection === "scissors") {
+                return "Rock beats scissors. You won!";
+            } else if (playerSelection === "rock" && computerSelection === "paper") {
+                return "Paper beats rock. You lost!";
+            } else if (playerSelection === "paper" && computerSelection === "rock") {
+                return "Paper beats rock. You won!";
+            } else if (playerSelection === "paper" && computerSelection === "scissors") {
+                return "Scissors beats paper. You lost!";
+            } else if (playerSelection === "scissors" && computerSelection === "paper") {
+                return "Scissors beats paper. You won!";
+            } else if (playerSelection === "scissors" && computerSelection === "rock") {
+                return "Rock beats scissors. You lost!";
+            } else if (playerSelection === computerSelection) {
+                return "It's a tie!";
+            } else {
+                return "That doesn't look right... Maybe try choosing rock, paper or scissors next time.";
+            }
+        }
+
+        console.log(playRound (playerSelection, computerSelection))
+
+        //Create a game function that contains playRound
+        //loops 5 times
+        //keeps score
+        //reports a winner/loser at the end
+
+        
+        function game() {
+            let result = playRound(playerSelection, computerSelection);
+            return result;
+        }
+        
+        for (let i = 0; i < 5; i++) {
+            game();
+        }
+
+
+        console.log(game())
+
+    </script>
+</body>
+</html>
