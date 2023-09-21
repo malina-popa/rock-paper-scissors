@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #8DDFCB;
+    font-family: 'Press Start 2P', cursive;
+    color: #373445;
+    font-size: 13px;
+}
+
+header {
+
+}
+
+.title {
+    color: #554994;
+}
+
+main {
+    display: flex;
+}
+
+section {
+    display: flex;
+}
+
+.window {
+
+}
+
+.title-bar {
+
+}
+
+.title-bar-text {
+
+}
+
+.title-bar-controls {
+
+}
+
+button {
+    
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #82A0D8;
+    padding: 32px;
+}
+
+
+
