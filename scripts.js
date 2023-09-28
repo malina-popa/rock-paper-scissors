@@ -1,73 +1,93 @@
-let playerScore = 0;
-let computerScore = 0;
-        
-function getComputerChoice () {
-    const choice = ["rock", "paper", "scissors"];
-    return choice[Math.floor(Math.random() * choice.length)];
-}
+const container = document.querySelector(".container");
 
-function playRound (playerSelection, computerSelection) {
-    let invalidPlayerSelection =
-    playerSelection !== "rock" ||
-    playerSelection !== "paper" ||
-    playerSelection !== "scissors";
-
-    if (playerSelection === "rock" && computerSelection === "scissors") {
-        return "Rock beats scissors. You won!";
-    } else if (playerSelection === "rock" && computerSelection === "paper") {
-        return "Paper beats rock. You lost!";
-    } else if (playerSelection === "paper" && computerSelection === "rock") {
-        return "Paper beats rock. You won!";
-    } else if (playerSelection === "paper" && computerSelection === "scissors") {
-        return "Scissors beats paper. You lost!";
-    } else if (playerSelection === "scissors" && computerSelection === "paper") {
-        return "Scissors beats paper. You won!";
-    } else if (playerSelection === "scissors" && computerSelection === "rock") {
-        return "Rock beats scissors. You lost!";
-    } else if (playerSelection === computerSelection) {
-        return "It's a tie!";
-    } else if (playerSelection === null) {
-        return;
-    } else if (invalidPlayerSelection) {
-        return "You have to write rock, paper or scissors!";
-    } 
-}
-
-function getfinalScore (playerScore, computerScore) {
-    if (playerScore > computerScore) {
-        console.log("You won the game!")
-    } else if (playerScore < computerScore) {
-        console.log("You lost the game!")
-    } else {
-        console.log("It's a tie!")
-    }
-
-    console.log(playerScore, computerScore)
-}
-
-function game() {
-    const playerSelection = prompt("Let's play Rock, Paper, Scissors! Please insert 'rock', 'paper', or 'scissors' to start playing.");
-    const computerSelection = getComputerChoice();
-    let roundResult = playRound(playerSelection, computerSelection);
-    return roundResult;
-}
-
-for (let i = 0; i < 5; i++) {
-    let outcome = game(); // outcome == roundResult ^
-    if (outcome === undefined) {
-        break;
-    }
-    let playerVictory = !!outcome.match(/won/); //str.match returns an array, so !! converts it to boolean; can also be written as let playerVictory = outcome.match(/won/), and then... (see below)
-    let computerVictory = !!outcome.match(/lost/);
-    if (playerVictory == true) {//...here you'd have playerVictory !== null;
-        playerScore += 1;
-    } else if (computerVictory == true) {
-        computerScore += 1;
-    } else if (outcome == "You have to write rock, paper or scissors!") {
-        i--; // if you input anything other than 'rock', 'paper' or 'scissors', you substract 1 from the loop, so the invalid answers don't count; in other words, the loop completes only if there are 5 valid inputs
-        console.log(outcome)
+function removeAllChildren(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
     }
 }
 
-getfinalScore(playerScore, computerScore);
+function addNewChildren(parent) {
+    function addText() {
+        const p = document.createElement("p");
+        p.innerHTML = "Start playing by choosing one of the three choices.<br>The first player to reach 5p wins the game."
+        parent.appendChild(p);
+    }
     
+    addText();
+
+    function addImages() {
+        const imageContainer = document.createElement("div");
+        parent.appendChild(imageContainer);
+        imageContainer.classList.add("image-container");
+    
+        const rock = document.createElement("img");
+        rock.src = "/images/rock.png";
+
+        const paper = document.createElement("img");
+        paper.src = "/images/paper.png";
+
+        const scissors = document.createElement("img");
+        scissors.src = "/images/scissors.png";
+
+        imageContainer.append(rock, paper, scissors);
+    }
+
+    addImages();
+
+    function addButtons() {
+        const buttonContainer = document.createElement("div");
+        parent.appendChild(buttonContainer);
+        buttonContainer.classList.add("button-container");
+    
+        rockButton = document.createElement("button");
+        rockButton.textContent = "ROCK";
+        rockButton.setAttribute("id", "button1");
+    
+        paperButton = document.createElement("button");
+        paperButton.textContent = "PAPER";
+        paperButton.setAttribute("id", "button2");
+    
+        scissorsButton = document.createElement("button");
+        scissorsButton.textContent = "SCISSORS";
+        scissorsButton.setAttribute("id", "button3");
+    
+        buttonContainer.append(rockButton, paperButton, scissorsButton);
+    
+        const buttons = document.querySelectorAll("button");
+        for (const button of buttons) {
+            button.classList.add("rps-buttons");
+        }
+    }
+
+    addButtons();
+
+    function addScoreText() {
+        const scoreContainer = document.createElement("div");
+        parent.appendChild(scoreContainer);
+        scoreContainer.classList.add("score-container");
+        
+        const playerScore = document.createElement("p");
+        playerScore.textContent = "PLAYER SCORE:"
+    
+        const computerScore = document.createElement("p");
+        computerScore.textContent = "COMPUTER SCORE:"
+    
+        scoreContainer.append(playerScore, computerScore);
+    }
+
+    addScoreText();
+}
+
+function removeChildrenWrapper() {
+    removeAllChildren(container);
+}
+
+function addChildrenWrapper() {
+    addNewChildren(container);
+}
+
+const btn = document.querySelector("#start");
+
+btn.addEventListener("click", removeChildrenWrapper);
+btn.addEventListener("click", addChildrenWrapper);
+// You could also use an anonymous function instead of the wrapper
