@@ -57,20 +57,40 @@ function addNewChildren(parent) {
         for (const button of buttons) {
             button.classList.add("rps-buttons");
         }
+
+        rockButton.addEventListener("click", () => {
+            playRound("rock");
+        });
+
+        paperButton.addEventListener("click", () => {
+            playRound("paper");
+        });
+
+        scissorsButton.addEventListener("click", () => {
+            playRound("scissors");
+        });
     }
+
 
     addButtons();
 
     function addScoreText() {
+
+        const roundResultParagraph = document.createElement("p");
+        roundResultParagraph.setAttribute("id", "result-text");
+        parent.appendChild(roundResultParagraph);
+
         const scoreContainer = document.createElement("div");
         parent.appendChild(scoreContainer);
         scoreContainer.classList.add("score-container");
         
         const playerScore = document.createElement("p");
-        playerScore.textContent = "PLAYER SCORE:"
+        playerScore.setAttribute("id", "player-score");
+        playerScore.innerHTML = "PLAYER SCORE: <span id='player-score-span'>0</span>";
     
         const computerScore = document.createElement("p");
-        computerScore.textContent = "COMPUTER SCORE:"
+        computerScore.setAttribute("id", "computer-score");
+        computerScore.innerHTML = "COMPUTER SCORE: <span id='computer-score-span'>0</span>";
     
         scoreContainer.append(playerScore, computerScore);
     }
@@ -91,3 +111,58 @@ const btn = document.querySelector("#start");
 btn.addEventListener("click", removeChildrenWrapper);
 btn.addEventListener("click", addChildrenWrapper);
 // You could also use an anonymous function instead of the wrapper
+
+function getComputerChoice () {
+    const choice = ["rock", "paper", "scissors"];
+    return choice[Math.floor(Math.random() * choice.length)];
+}
+
+function playRound (playerSelection) {
+
+    let playerScore = document.getElementById("player-score-span");
+    let computerScore = document.getElementById("computer-score-span");
+
+    if (playerScore.innerText == 5 || computerScore.innerText ==5) {
+        return;
+    }
+
+    const computerSelection = getComputerChoice();
+
+    let roundResult;
+
+    if (playerSelection === "rock" && computerSelection === "scissors") {
+        roundResult = "Rock beats scissors. You won!";
+    } else if (playerSelection === "rock" && computerSelection === "paper") {
+        roundResult = "Paper beats rock. You lost!";
+    } else if (playerSelection === "paper" && computerSelection === "rock") {
+        roundResult = "Paper beats rock. You won!";
+    } else if (playerSelection === "paper" && computerSelection === "scissors") {
+        roundResult = "Scissors beats paper. You lost!";
+    } else if (playerSelection === "scissors" && computerSelection === "paper") {
+        roundResult = "Scissors beats paper. You won!";
+    } else if (playerSelection === "scissors" && computerSelection === "rock") {
+        roundResult = "Rock beats scissors. You lost!";
+    } else if (playerSelection === computerSelection) {
+        roundResult = "It's a tie!";
+    } else if (playerSelection === null) {
+        roundResult = null;
+    }
+
+    const roundResultParagraph = document.getElementById("result-text");
+    roundResultParagraph.innerHTML = (roundResult);
+
+    let playerVictory = !!roundResult.match(/won/);
+    let computerVictory = !!roundResult.match(/lost/);
+
+    if (playerVictory == true) {
+        playerScore.innerText = parseInt(playerScore.innerText) + 1;
+    } else if (computerVictory == true) {
+        computerScore.innerText = parseInt(computerScore.innerText) + 1;
+    }
+
+    if (playerScore.innerText == 5) {
+        roundResultParagraph.textContent = "Congrats! You won the game!";
+    } else if (computerScore.innerText == 5) {
+        roundResultParagraph.textContent = "Seems like you've lost... Better luck next time.";
+    }
+}
