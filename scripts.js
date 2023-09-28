@@ -21,13 +21,13 @@ function addNewChildren(parent) {
         imageContainer.classList.add("image-container");
     
         const rock = document.createElement("img");
-        rock.src = "/images/rock.png";
+        rock.src = "images/rock.png";
 
         const paper = document.createElement("img");
-        paper.src = "/images/paper.png";
+        paper.src = "images/paper.png";
 
         const scissors = document.createElement("img");
-        scissors.src = "/images/scissors.png";
+        scissors.src = "images/scissors.png";
 
         imageContainer.append(rock, paper, scissors);
     }
