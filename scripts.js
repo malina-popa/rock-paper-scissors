@@ -75,11 +75,6 @@ function addNewChildren(parent) {
     addButtons();
 
     function addScoreText() {
-
-        const roundResultParagraph = document.createElement("p");
-        roundResultParagraph.setAttribute("id", "result-text");
-        parent.appendChild(roundResultParagraph);
-
         const scoreContainer = document.createElement("div");
         parent.appendChild(scoreContainer);
         scoreContainer.classList.add("score-container");
@@ -93,6 +88,10 @@ function addNewChildren(parent) {
         computerScore.innerHTML = "COMPUTER SCORE: <span id='computer-score-span'>0</span>";
     
         scoreContainer.append(playerScore, computerScore);
+
+        const roundResultParagraph = document.createElement("p");
+        roundResultParagraph.setAttribute("id", "result-text");
+        parent.appendChild(roundResultParagraph);
     }
 
     addScoreText();
@@ -165,4 +164,6 @@ function playRound (playerSelection) {
     } else if (computerScore.innerText == 5) {
         roundResultParagraph.textContent = "Seems like you've lost... Better luck next time.";
     }
+
+    
 }

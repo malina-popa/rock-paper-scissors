@@ -84,6 +84,25 @@ button.rps-buttons {
     
 }
 
+.score-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+
+#player-score,
+#computer-score {
+    border: 1px solid #bf9500;
+    padding: 0.5rem;
+}
+
+#result-text {
+    color: #e7b500;
+    margin-top: 1rem;
+}
+
 footer {
     text-align: center;
     background-color: #0f0f0f;
