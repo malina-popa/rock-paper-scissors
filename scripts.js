@@ -163,23 +163,20 @@ function playRound (playerSelection) {
     const playAgainButton = document.createElement("button");
     playAgainButton.setAttribute("id", "play-again");
 
-    const a = document.createElement("a");
+    function reloadPageOnClick(button, parent) {
+        button.addEventListener("click", () => {
+            location.reload();
+        })
+        parent.appendChild(button);
+    }
     
     if (playerScore.innerText == 5) {
         roundResultParagraph.textContent = "Congrats! You won the game!";
-        const playAgainLink = document.createTextNode("PLAY AGAIN");
-        a.appendChild(playAgainLink);
-        a.title = "PLAY AGAIN";
-        a.href = "/index";
-        playAgainButton.appendChild(a);
-        container.appendChild(playAgainButton);
+        playAgainButton.textContent = "PLAY AGAIN";
+        reloadPageOnClick(playAgainButton, container);
     } else if (computerScore.innerText == 5) {
         roundResultParagraph.textContent = "Seems like you've lost... Better luck next time.";
-        const playAgainLink = document.createTextNode("TRY YOUR LUCK AGAIN");
-        a.appendChild(playAgainLink);
-        a.title = "TRY YOUR LUCK AGAIN";
-        a.href = "/index";
-        playAgainButton.appendChild(a);
-        container.appendChild(playAgainButton);
+        playAgainButton.textContent = "TRY YOUR LUCK AGAIN";
+        reloadPageOnClick(playAgainButton);
     }
 }
