@@ -172,11 +172,11 @@ function playRound (playerSelection) {
     
     if (playerScore.innerText == 5) {
         roundResultParagraph.textContent = "Congrats! You won the game!";
-        playAgainButton.textContent = "PLAY AGAIN";
+        playAgainButton.textContent = "PLAY AGAIN >";
         reloadPageOnClick(playAgainButton, container);
     } else if (computerScore.innerText == 5) {
         roundResultParagraph.textContent = "Seems like you've lost... Better luck next time.";
-        playAgainButton.textContent = "TRY YOUR LUCK AGAIN";
-        reloadPageOnClick(playAgainButton);
+        playAgainButton.textContent = "TRY YOUR LUCK AGAIN >";
+        reloadPageOnClick(playAgainButton, container);
     }
 }
