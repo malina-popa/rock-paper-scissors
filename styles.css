@@ -9,6 +9,17 @@ body {
     font-family: 'Press Start 2P', cursive;
     color:  #e3e3e3;
     font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
 }
 
 .title {
@@ -19,17 +30,14 @@ body {
     -webkit-text-fill-color: transparent;
     text-align: center;
     margin-top: 3%;
-}
-
-a {
-    text-decoration: none;
+    font-size: 2rem;
 }
 
 main {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex:1;
 }
 
 .container {
@@ -85,7 +93,6 @@ img {
 
 button.rps-buttons {
     width: 8rem;
-    
 }
 
 .score-container {
@@ -93,13 +100,15 @@ button.rps-buttons {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin-top: 1rem;
+    margin: 1rem 0;
 }
 
 #player-score,
 #computer-score {
-    border: 1px solid #bf9500;
+    margin: 0;
     padding: 0.5rem;
+    border: 1px solid #5a480b;
+    border-radius: 4px;
 }
 
 #result-text {
@@ -108,11 +117,27 @@ button.rps-buttons {
 }
 
 footer {
-    text-align: center;
+    min-height: 50px;
     background-color: #0f0f0f;
     padding: 32px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem;
+}
+
+ul {
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+a:link {
+    color:#6b4891
+}
+
+a:visited {
+    color: #5e4679;
+}
+
+a:hover {
+    color: #8946d0;
 }
